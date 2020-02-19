@@ -29,8 +29,8 @@ class LinkedList:
         cur_list = []
         cur = self.head
         while cur.next:
-            cur_list.append((cur.data))
             cur = cur.next
+            cur_list.append(cur.data)
         print(cur_list)
 
     def _new_node(self, new_data):
@@ -53,10 +53,10 @@ class LinkedList:
         idx = 0
         cur = self.head
         while cur.next:
+            cur = cur.next
             if idx == index:
                 print(cur.data)
             idx += 1
-            cur = cur.next
         return None
 
     def erase(self, index:int):
