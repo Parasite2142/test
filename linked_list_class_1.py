@@ -78,6 +78,7 @@ class LinkedList:
                 cur.next = Node(new_data, prev=cur)
             if cur:
                 cur.prev.next = Node(new_data, next=cur, prev=cur.prev)
+                cur.prev = cur.prev.next
         else:
             return
 
@@ -89,6 +90,15 @@ class LinkedList:
             cur = cur.next
         return cur_list[::-1]
 
+    def reverse_list(self):
+        cur = self.head
+        while cur:
+            cur_prev = cur.prev
+            cur.prev = cur.next
+            cur.next = cur_prev
+            cur = cur.prev
+        self.head = cur_prev.prev
+
 my_list = LinkedList()
 
 my_list.preppend(3)
@@ -98,11 +108,3 @@ my_list.append(4)
 my_list.append(5)
 
 my_list.display()
-
-my_list.display()
-
-my_list.insert(4, 3)
-
-A = my_list.get_reversed()
-
-print(A)
