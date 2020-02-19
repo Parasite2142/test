@@ -26,17 +26,10 @@ class LinkedList:
     def display(self):
         cur_list = []
         cur = self.head
-        while True:
-            if not cur:
-                break
+        while cur:
             cur_list.append(cur.data)
             cur = cur.next
         print(cur_list)
-
-    def _new_node(self, new_data):
-        if not self.head:
-            self.head = Node(data=new_data)
-            return
 
     def _lenght(self):
         total = 0
@@ -61,9 +54,6 @@ class LinkedList:
         return None
 
     def erase(self, index:int):
-        if index >= self._lenght():
-            print("Index out of range")
-            return
         cur = self._find(index)
         if cur:
             if cur.prev:
@@ -72,6 +62,32 @@ class LinkedList:
                 cur.next.prev = cur.prev
             if cur == self.head:
                 self.head = cur.next
+        else:
+            print("Enter correct index")
+
+    def insert(self, new_data, index:int):
+        if index >= self._lenght():
+            print("Index out of range")
+            return
+        idx = 0
+        cur = self._find(index)
+        if cur:
+            if not cur.prev:
+                self.preppend(new_data)
+            if not cur.next:
+                cur.next = Node(new_data, prev=cur)
+            if cur:
+                cur.prev.next = Node(new_data, next=cur, prev=cur.prev)
+        else:
+            return
+
+    def get_reversed(self):
+        cur_list = []
+        cur = self.head
+        while cur:
+            cur_list.append(cur.data)
+            cur = cur.next
+        return cur_list[::-1]
 
 my_list = LinkedList()
 
@@ -83,7 +99,10 @@ my_list.append(5)
 
 my_list.display()
 
-my_list._find(3)
-
 my_list.display()
 
+my_list.insert(4, 3)
+
+A = my_list.get_reversed()
+
+print(A)
