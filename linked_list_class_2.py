@@ -54,18 +54,15 @@ class Linked_List:
 
     def insert(self, new_data, index:int):
         """ Method to add the data between the nodes. """
-        if index >= self.lenght():
-            print("Index of out the range.")
-            return
         result = self.find(index)
         if not result.prev:
             self.prepend(new_data)
-            return
-        if result:
+        elif result:
             result.prev.next = Node(data=new_data, next=result,
                                     prev=result.prev)
             result.prev = result.prev.next
-            return
+        else:
+            print("Index out of the range")
 
     def erase(self, index:int):
         target = self.find(index)
@@ -73,17 +70,14 @@ class Linked_List:
             if not target.next:
                 target.prev.next = None
                 target = None
-                return
-            if not target.prev:
+            elif not target.prev:
                 self.head = target.next
                 self.head.prev = None
                 target = None
-                return
-            if target:
+            elif target:
                 target.prev.next = target.next
                 target.next.prev = target.prev.prev
                 target = None
-                return
 
     def get_list(self):
         display_list = []
