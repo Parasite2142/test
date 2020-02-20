@@ -8,7 +8,7 @@ class Node:
 class Linked_List:
     """Class to manage linked list."""
     def __init__(self, initial_value=None):
-        self.head = Node(initial_value) if initial_value else None
+        self.head = Node(data=initial_value) if initial_value else None
 
     def prepend(self, new_data):
         """ Method to add new node to the linked list
