@@ -64,20 +64,34 @@ class Linked_List:
         else:
             print("Index out of the range")
 
-    def erase(self, index:int):
+    def _remove_element(self, target_node):
+        target = target_node
+        if not target.next:
+            target.prev.next = None
+            target = None
+        elif not target.prev:
+            self.head = target.next
+            self.head.prev = None
+            target = None
+        elif target:
+            target.prev.next = target.next
+            target.next.prev = target.prev.prev
+            target = None
+
+    def erase_by_index(self, index:int):
         target = self.find(index)
         if target:
-            if not target.next:
-                target.prev.next = None
-                target = None
-            elif not target.prev:
-                self.head = target.next
-                self.head.prev = None
-                target = None
-            elif target:
-                target.prev.next = target.next
-                target.next.prev = target.prev.prev
-                target = None
+            self._remove_element(target)
+
+
+    def erase_by_key(self, key):
+        current_node = self.head
+        while current_node:
+            if key == current_node.data:
+                self._remove_element(current_node)
+                return
+            current_node = current_node.next
+        print("Data was not found.")
 
     def get_list(self):
         display_list = []
@@ -86,6 +100,16 @@ class Linked_List:
             display_list.append(current_node.data)
             current_node = current_node.next
         print(display_list)
+
+    def get_index(self, key):
+        current_node = self.head
+        idx = 0
+        while current_node:
+            if current_node.data == key:
+                return idx
+            idx+=1
+            current_node = current_node.next
+        print("Data was not found.")
 
     def reverse_list(self):
         current_node = self.head
@@ -96,19 +120,3 @@ class Linked_List:
             current_node = current_node.prev
         self.head = prev_node.prev
 
-
-my_list = Linked_List()
-
-my_list.append(1)
-my_list.append(2)
-my_list.append(3)
-my_list.append(4)
-my_list.append(5)
-my_list.get_list()
-my_list.insert(4, 4)
-my_list.get_list()
-
-my_list.erase(0)
-my_list.insert(0, 0)
-my_list.reverse_list()
-my_list.get_list()
