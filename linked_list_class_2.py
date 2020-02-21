@@ -8,7 +8,7 @@ class Node:
 class Linked_List:
     """Class to manage linked list."""
     def __init__(self, initial_value=None):
-        self.head = Node(initial_value) if initial_value else None
+        self.head = Node(data=initial_value) if initial_value else None
 
     def prepend(self, new_data):
         """ Method to add new node to the linked list
@@ -41,9 +41,6 @@ class Linked_List:
 
     def find(self, index):
         """ Method to check the item on the called index. """
-        if index >= self.lenght():
-            print("Index of out the range.")
-            return
         idx = 0
         current_node = self.head
         while current_node:
@@ -51,6 +48,8 @@ class Linked_List:
                 return current_node
             idx += 1
             current_node = current_node.next
+        print("Index of out the range.")
+        return
 
     def insert(self, new_data, index:int):
         """ Method to add the data between the nodes. """

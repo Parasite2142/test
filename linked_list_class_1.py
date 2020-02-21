@@ -97,14 +97,4 @@ class LinkedList:
             cur.prev = cur.next
             cur.next = cur_prev
             cur = cur.prev
-        self.head = cur_prev.prev
-
-my_list = LinkedList()
-
-my_list.preppend(3)
-my_list.preppend(2)
-my_list.preppend(1)
-my_list.append(4)
-my_list.append(5)
-
-my_list.display()
+        self.head = cur_prev.prev # Визуализировать этот код на бумаге.
