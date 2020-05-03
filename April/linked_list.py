@@ -144,3 +144,15 @@ class LinkedList:
             return True
         else:
             return False
+
+    def reverse(self):
+        if self.length <= 1:
+            return
+        else:
+            curr_node = self.head
+            while curr_node:
+                prev_node = curr_node.next
+                curr_node.next = curr_node.prev
+                curr_node.prev = prev_node
+                curr_node = curr_node.prev
+            self.head , self.tail = self.tail, self.head
